@@ -46,11 +46,16 @@
 
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
-                        <input type="checkbox" id="status" {{$category->status === 1 ? 'checked':''}}/>
+                        <input
+                        type="checkbox"
+                        name="status"
+                          value="1"
+                        {{ $category->status == '1' ? 'checked' : '' }}
+                        id="status" />
                     </div>
 
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Update</buton>
+                        <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                         <a href="{{ url('category') }}" class="btn btn-secondary">Back</a>
                 </form>

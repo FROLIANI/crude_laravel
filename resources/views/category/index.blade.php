@@ -3,6 +3,11 @@
 @section('content')
 <div class="container">
     <div class="col-md-12">
+        @session('status')
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        @endsession
         <div class="card">
             <div class="card-header">
                 <h4>Categories List
@@ -32,7 +37,11 @@
                                    <td>
                                     <a href="{{ route('category.edit',$category->id) }}" class="btn btn-success">Edit</a>
                                      <a href="{{ route('category.show',$category->id) }}" class="btn btn-info">Show</a>
-                                      <a href="{{ route('category.destroy',$category->id) }}" class="btn btn-danger">Delete</a>
+                                     <form action="{{ route('category.destroy',$category->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                     </form>
                                    </td>
 
                             </tr>
@@ -42,6 +51,8 @@
 
                     </thead>
                 </table>
+
+                {{ $categories->links() }}
             </div>
         </div>
     </div>

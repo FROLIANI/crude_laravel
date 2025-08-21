@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         //Fetch all categories
-        $categories = Category::paginate(10);
+        $categories = Category::paginate(1);
         return view('category.index',[
             'categories'=> $categories,
         ]);
@@ -43,10 +43,10 @@ class CategoryController extends Controller
         Category::create([
             'name'=>$request->name,
             'description'=>$request->description,
-            'status'=>$request->status ==true ?1:0,
+            'status'=>$request->status ==true ? 1:0,
         ]);
 
-        return redirect()->route('category.index')->with('sucess','Category created Sucessfully');
+        return redirect()->route('category.index')->with('status','Category created Sucessfully');
     }
 
     /**
@@ -54,7 +54,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('category.show');
+        return view('category.show', compact('category'));
     }
 
     /**
@@ -83,7 +83,7 @@ class CategoryController extends Controller
             'status'=>$request->status ==true ?1:0,
         ]);
 
-        return redirect()->route('category.index')->with('sucess','Category Updated Sucessfully');
+        return redirect()->route('category.index')->with('status','Category Updated Sucessfully');
     }
 
     /**
@@ -91,6 +91,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        return redirect()->route('category.index')->with('success', 'Category deleted successfully');
+        //Delete the category
+        $category->delete();
+        return redirect()->route('category.index')->with('status', 'Category deleted successfully');
     }
 }
