@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         //Fetch all categories
-        $categories = Category::paginate(1);
+        $categories = Category::paginate(5);
         return view('category.index',[
             'categories'=> $categories,
         ]);
